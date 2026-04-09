@@ -1,0 +1,27 @@
+{
+  "changeId": "chg_001",
+  "targetSceneId": "scene-park-rain-001",
+  "operations": [
+    {
+      "op": "move-zone",
+      "zoneId": "cafe-se",
+      "to": "top_right"
+    },
+    {
+      "op": "set-weather",
+      "weather": {
+        "type": "rain",
+        "intensity": 0.2,
+        "wind": 0.05,
+        "overlayAlpha": 0.05,
+        "ambientTint": "#A1B0C6",
+        "useSplash": false
+      }
+    },
+    {
+      "op": "adjust-object-count",
+      "kind": "bench",
+      "delta": -2
+    }
+  ]
+}

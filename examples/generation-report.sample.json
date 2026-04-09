@@ -1,0 +1,50 @@
+{
+  "runId": "run_2026_04_09_001",
+  "sceneId": "scene-park-rain-001",
+  "status": "warning",
+  "summary": "场景已生成。可玩性通过，但视觉密度略不均衡。",
+  "scores": {
+    "playability": 0.95,
+    "layout": 0.88,
+    "visualBalance": 0.74
+  },
+  "checks": [
+    {
+      "id": "spawn-reachable",
+      "result": "pass",
+      "message": "默认出生点可到达所有主要区域"
+    },
+    {
+      "id": "bench-near-road",
+      "result": "warning",
+      "message": "2 张 bench 与道路边缘距离过大",
+      "count": 2
+    },
+    {
+      "id": "camera-bounds",
+      "result": "pass",
+      "message": "相机边界正确"
+    }
+  ],
+  "warnings": [
+    "建议减小右下区域装饰密度"
+  ],
+  "blockers": [],
+  "artifacts": [
+    {
+      "kind": "tiled-json",
+      "path": "tiled/maps/main.export.json"
+    },
+    {
+      "kind": "scene-spec",
+      "path": "examples/scene-spec.park-rain.sample.json"
+    },
+    {
+      "kind": "layout-plan",
+      "path": "examples/layout-plan.park-rain.sample.json"
+    }
+  ],
+  "repairActions": [
+    "将 2 张 bench 回收并重新贴边摆放"
+  ]
+}

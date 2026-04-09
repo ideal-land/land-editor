@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/scene-change-request.schema.json",
+  "title": "SceneChangeRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "changeId",
+    "targetSceneId",
+    "operations"
+  ],
+  "properties": {
+    "changeId": {
+      "type": "string"
+    },
+    "targetSceneId": {
+      "type": "string"
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "op"
+        ],
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "move-zone",
+              "set-weather",
+              "adjust-object-count",
+              "set-path-width",
+              "move-spawn"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

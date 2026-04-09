@@ -1,0 +1,18 @@
+{
+  "name": "pixel-scene-platform-kit",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "validate:spec": "node ./scripts/validate-scene.mjs",
+    "export:tiled": "bash ./scripts/export-tiled.sh"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "zod": "^3.24.0"
+  }
+}

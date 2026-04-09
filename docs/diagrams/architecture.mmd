@@ -1,0 +1,40 @@
+flowchart TB
+  subgraph Intake[输入]
+    U1[用户描述]
+    U2[像素素材包]
+  end
+
+  subgraph Generation[生成链路]
+    A[Asset Analyzer]
+    I[Intent Agent]
+    L[Layout Agent]
+    B[Map Builder]
+  end
+
+  subgraph Outputs[产物]
+    M1[Scene Spec]
+    M2[Layout Plan]
+    M3[Tiled Map]
+    M4[Phaser Preview]
+    M5[Generation Report]
+  end
+
+  subgraph Runtime[运行时]
+    P[Phaser Runtime]
+    V[Validator]
+  end
+
+  U2 --> A
+  U1 --> I
+  A --> M1
+  A --> L
+  I --> M1
+  M1 --> L
+  L --> M2
+  M2 --> B
+  B --> M3
+  M3 --> P
+  P --> M4
+  M3 --> V
+  M4 --> V
+  V --> M5

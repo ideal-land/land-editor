@@ -1,0 +1,9 @@
+{
+  "type": "rain",
+  "intensity": 0.35,
+  "wind": 0.12,
+  "overlayAlpha": 0.08,
+  "ambientTint": "#90A0B8",
+  "useSplash": true,
+  "fogDensity": 0
+}

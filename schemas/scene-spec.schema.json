@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/scene-spec.schema.json",
+  "title": "SceneSpec",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sceneId",
+    "theme",
+    "mapSize",
+    "tileSize",
+    "player",
+    "camera",
+    "weather",
+    "zones",
+    "paths",
+    "objects",
+    "constraints"
+  ],
+  "properties": {
+    "sceneId": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "string"
+    },
+    "tileSize": {
+      "type": "integer",
+      "minimum": 8
+    },
+    "mapSize": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 16
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 16
+        }
+      }
+    },
+    "player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "characterId",
+        "spawnHint",
+        "movement"
+      ],
+      "properties": {
+        "characterId": {
+          "type": "string"
+        },
+        "spawnHint": {
+          "type": "string"
+        },
+        "movement": {
+          "type": "string",
+          "enum": [
+            "4dir",
+            "8dir"
+          ]
+        },
+        "speed": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "followPlayer",
+        "zoom"
+      ],
+      "properties": {
+        "followPlayer": {
+          "type": "boolean"
+        },
+        "zoom": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 6
+        },
+        "deadzone": {
+          "type": "boolean"
+        }
+      }
+    },
+    "weather": {
+      "$ref": "weather-preset.schema.json"
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "areaHint"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "areaHint": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "small",
+              "medium",
+              "large"
+            ]
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "width",
+          "anchor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "line",
+              "fork",
+              "y-road",
+              "loop"
+            ]
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "anchor": {
+            "type": "string"
+          },
+          "connectZones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "count",
+          "placement"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "placement": {
+            "type": "string"
+          },
+          "orientation": {
+            "type": "string"
+          },
+          "zoneId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mustBeWalkable",
+        "preserveOpenCenter"
+      ],
+      "properties": {
+        "mustBeWalkable": {
+          "type": "boolean"
+        },
+        "preserveOpenCenter": {
+          "type": "boolean"
+        },
+        "maxObjectDensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mustReachZones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

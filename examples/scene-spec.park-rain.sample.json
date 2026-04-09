@@ -1,0 +1,89 @@
+{
+  "sceneId": "scene-park-rain-001",
+  "theme": "pixel park town",
+  "tileSize": 16,
+  "mapSize": {
+    "width": 120,
+    "height": 80
+  },
+  "player": {
+    "characterId": "player_01",
+    "spawnHint": "road_near_center",
+    "movement": "4dir",
+    "speed": 120
+  },
+  "camera": {
+    "followPlayer": true,
+    "zoom": 2,
+    "deadzone": false
+  },
+  "weather": {
+    "type": "rain",
+    "intensity": 0.35,
+    "wind": 0.12,
+    "overlayAlpha": 0.08,
+    "ambientTint": "#90A0B8",
+    "useSplash": true,
+    "fogDensity": 0
+  },
+  "zones": [
+    {
+      "id": "forest-nw",
+      "kind": "forest",
+      "areaHint": "top_left",
+      "size": "large",
+      "priority": 9
+    },
+    {
+      "id": "cafe-se",
+      "kind": "cafe",
+      "areaHint": "bottom_right",
+      "size": "medium",
+      "priority": 8
+    },
+    {
+      "id": "plaza-center",
+      "kind": "plaza",
+      "areaHint": "center",
+      "size": "small",
+      "priority": 6
+    }
+  ],
+  "paths": [
+    {
+      "id": "main-road",
+      "kind": "y-road",
+      "width": 3,
+      "anchor": "center",
+      "connectZones": [
+        "plaza-center",
+        "cafe-se",
+        "forest-nw"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "kind": "bench",
+      "count": 10,
+      "placement": "along-road",
+      "orientation": "follow-road"
+    },
+    {
+      "kind": "lamp",
+      "count": 6,
+      "placement": "along-road",
+      "orientation": "upright"
+    }
+  ],
+  "constraints": {
+    "mustBeWalkable": true,
+    "preserveOpenCenter": true,
+    "maxObjectDensity": 0.32,
+    "mustReachZones": [
+      "forest-nw",
+      "cafe-se",
+      "plaza-center"
+    ]
+  }
+}

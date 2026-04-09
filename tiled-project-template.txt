@@ -1,0 +1,7 @@
+建议自行在 `tiled/` 下初始化：
+- project.tiled-project
+- maps/main.tmx
+- tilesets/world.tsx
+- templates/*.tx
+
+本设计包不直接生成真实 TMX，只提供命名规范、schema 与 builder 骨架。

@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "projectId": "pixel-park-demo",
+  "tileSize": 16,
+  "tilesets": [
+    {
+      "id": "town_base",
+      "image": "assets/source/tilesets/town_base.png",
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "firstGid": 1,
+      "categories": [
+        "ground",
+        "road",
+        "foliage",
+        "building"
+      ],
+      "autotileHints": [
+        "road-edge",
+        "grass-border"
+      ]
+    }
+  ],
+  "placeables": [
+    {
+      "id": "bench_wood",
+      "kind": "bench",
+      "sourceType": "tile-object",
+      "assetRef": "town_base:bench_wood",
+      "placementModes": [
+        "along-road",
+        "near-plaza"
+      ],
+      "collision": false,
+      "rotatable": true,
+      "tags": [
+        "park",
+        "seat",
+        "furniture"
+      ],
+      "variants": [
+        "bench_wood_a",
+        "bench_wood_b"
+      ]
+    },
+    {
+      "id": "lamp_classic",
+      "kind": "lamp",
+      "sourceType": "tile-object",
+      "assetRef": "town_base:lamp_classic",
+      "placementModes": [
+        "along-road",
+        "near-building-entrance"
+      ],
+      "collision": false,
+      "rotatable": false,
+      "tags": [
+        "lighting",
+        "street"
+      ],
+      "variants": []
+    }
+  ],
+  "characters": [
+    {
+      "id": "player_01",
+      "spritesheet": "assets/source/chars/player_01.png",
+      "frameWidth": 16,
+      "frameHeight": 24,
+      "animations": {
+        "idle_down": {
+          "start": 0,
+          "end": 0,
+          "frameRate": 1,
+          "repeat": -1
+        },
+        "walk_down": {
+          "start": 0,
+          "end": 3,
+          "frameRate": 8,
+          "repeat": -1
+        },
+        "walk_left": {
+          "start": 4,
+          "end": 7,
+          "frameRate": 8,
+          "repeat": -1
+        },
+        "walk_right": {
+          "start": 8,
+          "end": 11,
+          "frameRate": 8,
+          "repeat": -1
+        },
+        "walk_up": {
+          "start": 12,
+          "end": 15,
+          "frameRate": 8,
+          "repeat": -1
+        }
+      }
+    }
+  ],
+  "weatherAssets": [
+    {
+      "id": "rain_drop",
+      "kind": "rain",
+      "texture": "assets/source/weather/rain_drop.png"
+    },
+    {
+      "id": "rain_splash",
+      "kind": "splash",
+      "texture": "assets/source/weather/rain_splash.png"
+    }
+  ]
+}

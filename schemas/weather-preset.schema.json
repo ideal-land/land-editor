@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/weather-preset.schema.json",
+  "title": "WeatherPreset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "intensity",
+    "wind",
+    "overlayAlpha",
+    "ambientTint",
+    "useSplash"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "clear",
+        "rain",
+        "snow",
+        "fog"
+      ]
+    },
+    "intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "wind": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+    },
+    "overlayAlpha": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "ambientTint": {
+      "type": "string",
+      "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$"
+    },
+    "useSplash": {
+      "type": "boolean"
+    },
+    "fogDensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sfx": {
+      "type": "string"
+    }
+  }
+}

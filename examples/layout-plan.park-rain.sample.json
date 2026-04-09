@@ -1,0 +1,146 @@
+{
+  "sceneId": "scene-park-rain-001",
+  "mapSize": {
+    "width": 120,
+    "height": 80
+  },
+  "anchors": [
+    {
+      "id": "center",
+      "x": 60,
+      "y": 40,
+      "kind": "hub"
+    },
+    {
+      "id": "forest-entry",
+      "x": 28,
+      "y": 20,
+      "kind": "zone-entry"
+    },
+    {
+      "id": "cafe-entry",
+      "x": 92,
+      "y": 60,
+      "kind": "zone-entry"
+    }
+  ],
+  "pathSegments": [
+    {
+      "id": "road-trunk",
+      "points": [
+        {
+          "x": 60,
+          "y": 78
+        },
+        {
+          "x": 60,
+          "y": 40
+        }
+      ],
+      "width": 3,
+      "material": "stone-road"
+    },
+    {
+      "id": "road-branch-left",
+      "points": [
+        {
+          "x": 60,
+          "y": 40
+        },
+        {
+          "x": 30,
+          "y": 20
+        }
+      ],
+      "width": 3,
+      "material": "stone-road"
+    },
+    {
+      "id": "road-branch-right",
+      "points": [
+        {
+          "x": 60,
+          "y": 40
+        },
+        {
+          "x": 92,
+          "y": 60
+        }
+      ],
+      "width": 3,
+      "material": "stone-road"
+    }
+  ],
+  "zoneBounds": [
+    {
+      "zoneId": "forest-nw",
+      "x": 4,
+      "y": 4,
+      "width": 36,
+      "height": 26
+    },
+    {
+      "zoneId": "cafe-se",
+      "x": 80,
+      "y": 52,
+      "width": 24,
+      "height": 18
+    },
+    {
+      "zoneId": "plaza-center",
+      "x": 48,
+      "y": 34,
+      "width": 22,
+      "height": 12
+    }
+  ],
+  "placements": [
+    {
+      "kind": "bench",
+      "id": "bench-001",
+      "x": 52,
+      "y": 48,
+      "rotation": 0,
+      "zoneId": "plaza-center"
+    },
+    {
+      "kind": "bench",
+      "id": "bench-002",
+      "x": 68,
+      "y": 48,
+      "rotation": 180,
+      "zoneId": "plaza-center"
+    },
+    {
+      "kind": "lamp",
+      "id": "lamp-001",
+      "x": 60,
+      "y": 58,
+      "rotation": 0,
+      "zoneId": "plaza-center"
+    }
+  ],
+  "navigation": {
+    "walkableRectangles": [
+      {
+        "x": 46,
+        "y": 32,
+        "width": 28,
+        "height": 16
+      },
+      {
+        "x": 55,
+        "y": 40,
+        "width": 10,
+        "height": 38
+      }
+    ],
+    "spawnCandidates": [
+      {
+        "id": "spawn-main",
+        "x": 60,
+        "y": 46
+      }
+    ]
+  }
+}

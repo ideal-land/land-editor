@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/asset-manifest.schema.json",
+  "title": "AssetManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "projectId",
+    "tileSize",
+    "tilesets",
+    "placeables",
+    "characters"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "projectId": {
+      "type": "string"
+    },
+    "tileSize": {
+      "type": "integer",
+      "minimum": 8
+    },
+    "tilesets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "image",
+          "tileWidth",
+          "tileHeight",
+          "categories"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "tileWidth": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tileHeight": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "firstGid": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "autotileHints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "placeables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "sourceType",
+          "assetRef",
+          "placementModes",
+          "collision",
+          "rotatable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "tile",
+              "tile-object",
+              "sprite",
+              "animated-sprite"
+            ]
+          },
+          "assetRef": {
+            "type": "string"
+          },
+          "placementModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "collision": {
+            "type": "boolean"
+          },
+          "rotatable": {
+            "type": "boolean"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "spritesheet",
+          "frameWidth",
+          "frameHeight",
+          "animations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "spritesheet": {
+            "type": "string"
+          },
+          "frameWidth": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "frameHeight": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "animations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "start",
+                "end",
+                "frameRate",
+                "repeat"
+              ],
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "frameRate": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "repeat": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "weatherAssets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "rain",
+              "snow",
+              "fog",
+              "splash",
+              "overlay"
+            ]
+          },
+          "texture": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
