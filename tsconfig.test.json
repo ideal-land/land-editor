@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "outDir": ".tmp-dist",
+    "rootDir": "."
+  },
+  "include": [
+    "apps/agent-orchestrator/src/**/*.ts",
+    "packages/map-builder/src/**/*.ts",
+    "packages/validator/src/**/*.ts",
+    "packages/scene-schema/src/**/*.ts",
+    "packages/asset-analyzer/src/**/*.ts",
+    "types-node-shim.d.ts"
+  ]
+}
