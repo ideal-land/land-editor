@@ -17,6 +17,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image('player', 'assets/processed/chars/player_01.png');
     this.load.image('weather_rain', 'assets/processed/weather/rain_drop.png');
     this.load.image('weather_snow', 'assets/processed/weather/snow_flake.png');
+    this.load.json('weather-preset', 'generated/weather-preset.json');
   }
 
   create(): void {
@@ -31,14 +32,11 @@ export class MainScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true);
 
     this.weather = new WeatherSystem(this);
-    this.weather.apply({
-      type: 'rain',
-      intensity: 0.35,
-      wind: 0.12,
-      overlayAlpha: 0.08,
-      ambientTint: '#90A0B8',
-      useSplash: true
-    });
+    const weatherPreset = this.cache.json.get('weather-preset') as Parameters<WeatherSystem['apply']>[0] | undefined;
+    if (!weatherPreset) {
+      throw new Error('generated/weather-preset.json 缺失，无法预览最新生成结果');
+    }
+    this.weather.apply(weatherPreset);
   }
 
   update(): void {
