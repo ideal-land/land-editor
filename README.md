@@ -61,3 +61,48 @@
 ## 一句话总结
 
 这套方案的目标不是“帮你自动摆一张图”，而是提供一条**可反复生产像素场景**的标准流水线。
+
+
+## 快速试用（你要的完整链路）
+
+目标链路：
+1. 你把素材图放到一个文件夹
+2. 启动命令
+3. 在网页和 agent 对话，页面实时刷新生成结果
+
+### 第一步：初始化试用目录
+
+```bash
+npm run trial:init
+```
+
+会自动创建：
+- `trial-data/assets-upload`（放素材）
+- `trial-data/output`（每轮输出）
+- `apps/runtime-phaser/public/tiled/maps`
+- `apps/runtime-phaser/public/generated`
+- `.env.trial`
+
+### 第二步：放素材并配置模型
+
+- 把素材图放到 `trial-data/assets-upload`
+- 编辑 `.env.trial`，至少填写：
+  - `OPENAI_COMPAT_BASE_URL`
+  - `OPENAI_COMPAT_API_KEY`
+
+### 第三步：加载环境变量
+
+```bash
+set -a && source ./.env.trial && set +a
+```
+
+### 第四步：启动生成 API
+
+```bash
+npm run trial:webapi
+```
+
+### 第五步：启动前端并在页面对话
+
+启动 `runtime-phaser` 前端后，在页面右下角输入需求，点击“生成并刷新预览”。
+每轮会生成到 `trial-data/output/turn-xxx`，并同步到前端预览目录。

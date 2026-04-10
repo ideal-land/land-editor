@@ -5,7 +5,12 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "validate:spec": "node ./scripts/validate-scene.mjs",
-    "export:tiled": "bash ./scripts/export-tiled.sh"
+    "export:tiled": "bash ./scripts/export-tiled.sh",
+    "test": "python - <<'PY'\nimport shutil\nshutil.rmtree('.tmp-dist', ignore_errors=True)\nPY\ntsc -p tsconfig.test.json && node --test tests-pipeline.test.cjs tests-fullchain.test.cjs tests-openai-adapter.test.cjs tests-openai-fullchain-save.test.cjs tests-map-builder.test.cjs tests-trial-init.test.cjs tests-chat-session.test.cjs tests-web-generate.test.cjs",
+    "trial:openai": "python - <<'PY'\nimport shutil\nshutil.rmtree('.tmp-dist', ignore_errors=True)\nPY\ntsc -p tsconfig.test.json && node ./.tmp-dist/apps/agent-orchestrator/src/cli.js",
+    "trial:init": "python - <<'PY'\nimport shutil\nshutil.rmtree('.tmp-dist', ignore_errors=True)\nPY\ntsc -p tsconfig.test.json && node ./.tmp-dist/apps/agent-orchestrator/src/trial-init-cli.js",
+    "trial:chat": "python - <<'PY'\nimport shutil\nshutil.rmtree('.tmp-dist', ignore_errors=True)\nPY\ntsc -p tsconfig.test.json && node ./.tmp-dist/apps/agent-orchestrator/src/chat-cli.js",
+    "trial:webapi": "python - <<'PY'\nimport shutil\nshutil.rmtree('.tmp-dist', ignore_errors=True)\nPY\ntsc -p tsconfig.test.json && node ./.tmp-dist/apps/agent-orchestrator/src/web-generate-server.js"
   },
   "workspaces": [
     "apps/*",
@@ -14,5 +19,9 @@
   "devDependencies": {
     "typescript": "^5.6.0",
     "zod": "^3.24.0"
+  },
+  "dependencies": {
+    "ai": "^4.3.16",
+    "@ai-sdk/openai-compatible": "^0.0.16"
   }
 }
