@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { loadTiledMap } from '../../../../packages/runtime-core/src/systems/MapLoader';
 import { WeatherSystem } from '../../../../packages/runtime-core/src/systems/WeatherSystem';
 
+const GENERATE_API_URL = 'http://localhost:8787/generate';
+
 export class MainScene extends Phaser.Scene {
   private player!: Phaser.Physics.Arcade.Sprite;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -37,6 +39,64 @@ export class MainScene extends Phaser.Scene {
       throw new Error('generated/weather-preset.json 缺失，无法预览最新生成结果');
     }
     this.weather.apply(weatherPreset);
+
+    this.mountChatPanel();
+  }
+
+  private mountChatPanel(): void {
+    const panel = document.createElement('div');
+    panel.style.position = 'fixed';
+    panel.style.right = '12px';
+    panel.style.bottom = '12px';
+    panel.style.width = '360px';
+    panel.style.background = 'rgba(0,0,0,0.72)';
+    panel.style.padding = '10px';
+    panel.style.borderRadius = '8px';
+    panel.style.zIndex = '9999';
+    panel.style.color = '#fff';
+
+    const input = document.createElement('input');
+    input.placeholder = '描述你想生成的场景，例如：再加一条小路';
+    input.style.width = '100%';
+    input.style.marginBottom = '8px';
+
+    const status = document.createElement('div');
+    status.style.fontSize = '12px';
+    status.style.marginBottom = '8px';
+
+    const button = document.createElement('button');
+    button.textContent = '生成并刷新预览';
+
+    button.onclick = async () => {
+      const prompt = input.value.trim();
+      if (!prompt) return;
+
+      status.textContent = '生成中...';
+      button.disabled = true;
+
+      try {
+        const resp = await fetch(GENERATE_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+        const data = await resp.json();
+        if (!resp.ok || !data.ok) {
+          throw new Error(data.error ?? '生成失败');
+        }
+        status.textContent = '生成完成，正在刷新...';
+        window.location.reload();
+      } catch (error: any) {
+        status.textContent = `生成失败: ${error?.message ?? String(error)}`;
+      } finally {
+        button.disabled = false;
+      }
+    };
+
+    panel.appendChild(input);
+    panel.appendChild(status);
+    panel.appendChild(button);
+    document.body.appendChild(panel);
   }
 
   update(): void {

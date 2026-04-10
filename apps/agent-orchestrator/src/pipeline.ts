@@ -9,6 +9,7 @@ import type {
   SceneSpec,
   WeatherType
 } from '../../../packages/scene-schema/src';
+import type { AssetLabelAgent } from '../../../packages/asset-analyzer/src';
 
 export interface PipelineInput {
   userPrompt: string;
@@ -35,6 +36,7 @@ export interface RunPipelineFromAssetsInput {
   tileSize: number;
   assetRoot: string;
   intentAgent: IntentAgent;
+  assetLabelAgent?: AssetLabelAgent;
 }
 
 export interface PipelineFromAssetsOutput extends PipelineOutput {
@@ -185,7 +187,8 @@ export async function runPipelineFromAssets(input: RunPipelineFromAssetsInput): 
   const analyzed = await analyzeAssets({
     projectId: input.projectId,
     tileSize: input.tileSize,
-    assetRoot: input.assetRoot
+    assetRoot: input.assetRoot,
+    labelAgent: input.assetLabelAgent
   });
 
   if (analyzed.unresolved.length > 0) {

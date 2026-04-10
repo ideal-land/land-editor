@@ -33,4 +33,27 @@ declare module '@ai-sdk/openai-compatible' {
 
 declare const process: {
   env: Record<string, string | undefined>;
+  cwd(): string;
+};
+
+declare module 'node:readline/promises' {
+  export function createInterface(args: { input: unknown; output: unknown }): {
+    question(query: string): Promise<string>;
+    close(): void;
+  };
+}
+
+declare module 'node:process' {
+  export const stdin: unknown;
+  export const stdout: unknown;
+}
+
+declare module 'node:http' {
+  export function createServer(handler: (req: any, res: any) => void): {
+    listen(port: number, cb?: () => void): void;
+  };
+}
+
+declare const Buffer: {
+  from(input: string): { toString(enc?: string): string };
 };

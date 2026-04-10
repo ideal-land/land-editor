@@ -91,3 +91,45 @@ test('runPipelineFromAssets should complete end-to-end with configured agent', a
   assert.notEqual(output.report.status, 'failed');
   assert.ok(output.layoutPlan.navigation.spawnCandidates.length > 0);
 });
+
+test('analyzeAssets should still resolve minimal assets with generic file names', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'land-assets-generic-'));
+  await fs.mkdir(path.join(dir, 'upload'), { recursive: true });
+
+  await fs.writeFile(path.join(dir, 'upload', 'a.png'), 'x');
+  await fs.writeFile(path.join(dir, 'upload', 'b.png'), 'x');
+
+  const result = await analyzeAssets({
+    projectId: 'generic-upload',
+    tileSize: 16,
+    assetRoot: dir
+  });
+
+  assert.ok(result.manifest.tilesets.length >= 1);
+  assert.ok(result.manifest.characters.length >= 1);
+});
+
+test('analyzeAssets should use label agent result for semantic tagging', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'land-assets-agent-'));
+  await fs.mkdir(path.join(dir, 'upload'), { recursive: true });
+  await fs.writeFile(path.join(dir, 'upload', 'a.png'), 'x');
+
+  const result = await analyzeAssets({
+    projectId: 'agent-upload',
+    tileSize: 16,
+    assetRoot: dir,
+    labelAgent: {
+      async labelAssets({ imageFiles }) {
+        return {
+          tilesets: [{ file: imageFiles[0], categories: ['ground', 'foliage'] }],
+          characters: [{ file: imageFiles[0], id: 'hero' }],
+          placeables: [{ file: imageFiles[0], kind: 'tree' }],
+          weatherAssets: []
+        };
+      }
+    }
+  });
+
+  assert.equal(result.manifest.placeables[0].kind, 'tree');
+  assert.equal(result.manifest.characters[0].id, 'hero');
+});

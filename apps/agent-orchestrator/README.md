@@ -84,6 +84,19 @@ node ./apps/agent-orchestrator/src/cli.ts
 ```
 
 
+### 6) 自动创建试用目录（推荐先执行）
+
+```bash
+npm run trial:init
+```
+
+执行后会自动创建：
+- `trial-data/assets-upload`（你只需要把素材放这里）
+- `trial-data/output`（生成结果输出）
+- `apps/runtime-phaser/public/tiled/maps`
+- `apps/runtime-phaser/public/generated`
+- `.env.trial`（已自动填好本地目录路径）
+
 ### 6) 验收试用（推荐）
 
 ```bash
@@ -99,3 +112,37 @@ npm run trial:openai
 - `layout-plan.json`
 - `tiled-map.json`
 - `generation-report.json`
+
+
+### 7) 用 Asset Label Agent 做语义标注（推荐生产环境）
+
+`analyzeAssets` 支持传入 `labelAgent`。
+
+这样即使素材文件名是 `a.png`，也可以由 agent 返回语义标签（例如 `tree`、`hero`），再进入后续 SceneSpec 生成。
+
+
+### 8) 对话式试用（你说一句，agent 生成一版）
+
+把素材放到 `trial-data/assets-upload` 后，执行：
+
+```bash
+set -a && source ./.env.trial && set +a
+npm run trial:chat
+```
+
+- 每输入一条需求，会生成一轮结果到 `trial-data/output/turn-001`、`turn-002`...
+- 同时会同步最新结果到 `apps/runtime-phaser/public` 供前端预览。
+
+
+### 9) 网页实时对话链路（你要的完整链路）
+
+1. `npm run trial:init`
+2. 把素材放进 `trial-data/assets-upload`
+3. `set -a && source ./.env.trial && set +a`
+4. 启动生成 API：
+
+```bash
+npm run trial:webapi
+```
+
+5. 启动 `runtime-phaser` 前端后，在页面右下角输入需求并点击“生成并刷新预览”，即可看到最新生成结果。
